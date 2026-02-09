@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock%}</title>
+    <link rel="stylesheet" href="{%static 'core/css/bootstrap.rtl.min.css'%}">
+     <link rel="stylesheet" href="{%static 'core/css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+
+    <!-- لوگو / نام سایت -->
+    <a class="navbar-brand fw-bold" href="{% url 'ad_list' %}">
+      MiniDivar
+    </a>
+
+    <!-- دکمه موبایل -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- منو سمت راست -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}"> درباره ما</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ad_list' %}">همه آگهی‌ها</a>
+        </li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add_ad' %}">ثبت آگهی</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'my_ad' %}">آگهی‌های من</a>
+        </li>
+        {% endif %}
+      </ul>
+
+      <!-- منو سمت چپ (کاربر) -->
+      <div class="d-flex align-items-center">
+
+        {% if user.is_authenticated %}
+          <span class="text-white me-3">سلام {{ user.username }}</span>
+
+          <form method="post" action="{% url 'logout' %}" class="d-inline m-0 p-0">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-light btn-sm">خروج</button>
+          </form> 
+
+        {% else %}
+          <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm me-2">ورود</a>
+          <a href="{% url 'signup' %}" class="btn btn-warning btn-sm">ثبت‌نام</a>
+        {% endif %}
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+<!-- نمایش پیام به کاربر -->
+<div class="message-wrapper"> 
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert 
+                {% if message.tags == 'error' %}alert-danger
+                {% elif message.tags == 'success' %}alert-success
+                {% elif message.tags == 'warning' %}alert-warning
+                {% else %}alert-info
+                {% endif %}
+                alert-dismissible fade show text-center shadow-sm">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+</div>
+{% endif %}
+<!-- قرار دادن محتوای هر صفحه در این قسمت-->
+<div class="content-wrapper">
+{%block content%}
+{%endblock%}
+</div>
+
+<script src="{%static 'core/js/bootstrap.bundle.js'%}"></script>
+<script>
+    setTimeout(function () {
+        let alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+            let bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        });
+    }, 3000);  // 3000 میلی‌ثانیه = 3 ثانیه
+</script>
+</body>
+</html>
