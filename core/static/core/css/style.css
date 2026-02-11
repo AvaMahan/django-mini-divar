@@ -2,7 +2,7 @@
 /* ================== General ================== */
 body {
     font-family: 'Vazir', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f8f8fa;
 }
 
 /* ================== Navbar ================== */
@@ -91,3 +91,18 @@ h2 {
 }
 
 /* ================== متن وسط چین ================== */
+.ad-image{
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+}
+.ad-detail-image{
+     max-height: 300px;
+      width: 100%;
+    background-color: #f8f9fa;
+ object-fit: contain;
+display: block;
+ margin: 0 auto;
+   
+
+}

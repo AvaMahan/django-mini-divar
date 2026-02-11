@@ -9,9 +9,9 @@
 
         <div class="card shadow-sm">
           {%if ad.image%}
-        <img src="{{ad.image.url }}" alt="{{ad.title}}" class="card-img-top" style="height: 180px; object-fit: cover;">
+        <img src="{{ad.image.url }}" alt="{{ad.title}}" class="card-img-top .ad-detail-image" >
         {%else%}
-        <img src="{%static 'img/default.jpg'%}" alt="{{ad.title}}" class="card-img-top" style="height: 180px; object-fit: cover;">
+        <img src="{%static 'img/default.jpg'%}" alt="{{ad.title}}" class="card-img-top ad-detail-image" >
         {%endif%}
             <div class="card-body">
 
