@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Django Mini Divar
 
 A mini Divar-like classified ads platform built with Django.
@@ -35,3 +36,7 @@ A mini Divar-like classified ads platform built with Django.
 ## Notes
 
 This project is created for learning and portfolio purposes.
+=======
+# django-mini-divar
+A mini Divar-like classified ads platform built with Django | پلتفرم آگهی مشابه دیوار با جنگو
+>>>>>>> 839d2ab463b6d3026910e0de182048bd921757b9
