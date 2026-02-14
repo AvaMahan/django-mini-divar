@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from .models import Ad
 from .forms import SignUpForm,AddAdForm
@@ -39,9 +40,14 @@ def edite_ad(request,id):
      return render(request,'core/add_ad.html',{'form':form})
 
 def ad_list(request):
-    print('hi viw ad list')
-    ads=Ad.objects.all().order_by('-created_at')
-    return render(request,'core/ad_list.html',{'ads':ads})
+      query = request.GET.get('q')  # پارامتر q از فرم
+      if query:
+        ads = Ad.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+      else:     
+        ads=Ad.objects.all().order_by('-created_at')
+      return render(request,'core/ad_list.html',{'ads':ads})
 
 def ad_detail(request,id):
     ad=get_object_or_404(Ad,id=id)

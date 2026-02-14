@@ -3,7 +3,10 @@
 
 {% block content %}
 <h2 class="mb-4 text-center mt-4">لیست آگهی‌ها</h2>
-
+<form  method="get" class="d-flex justify-content-center mb-4">
+    <input type="text" placeholder="جستجو" class="form-control w-50 me-2" name="q" value="{{request.GET.q|default:''}}">
+    <button type="submit" class="btn btn-primary">جستجو</button>
+</form>
 <div class="container">
     <div class="row g-4">
         {% for ad in ads %}
